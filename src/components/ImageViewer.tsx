@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { Image, ImageSourcePropType, StyleSheet } from "react-native";
 
 interface Props {
@@ -6,7 +7,10 @@ interface Props {
 }
 
 const ImageViewer = ({ source, selectedImage }: Props) => {
-  const imageSource = selectedImage ? { uri: selectedImage } : source;
+  const imageSource = useMemo(() => {
+    return selectedImage ? { uri: selectedImage } : source;
+  }, [selectedImage, source]);
+
   return <Image source={imageSource} style={styles.image} />;
 };
 
